@@ -115,7 +115,6 @@ GEM
     method_source (0.7.1)
     mime-types (1.17.2)
     multi_json (1.0.4)
-    mysql2 (0.3.11)
     nokogiri (1.5.0)
     orm_adapter (0.0.6)
     pg (0.13.2)
@@ -224,7 +223,6 @@ DEPENDENCIES
   json
   launchy
   make_voteable
-  mysql2
   nested_form!
   pg
   pry
