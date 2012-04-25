@@ -105,7 +105,7 @@ class Post < ActiveRecord::Base
 		sql = "SELECT * FROM posts 
 					 #{where}
 		 			 ORDER BY #{order_algorithm}
-			 		 DESC LIMIT ?, 20"
+			 		 DESC LIMIT ? OFFSET 20"
 
 		Post.find_by_sql [sql, offset]
 	end
