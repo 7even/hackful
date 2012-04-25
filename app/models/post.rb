@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
 	include Rails.application.routes.url_helpers
 
-	has_many :comments, :as => :commentable, :order => "((comments.up_votes - comments.down_votes) - 1 )/POW((((UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(comments.created_at)) / 3600 )+2), 1.5) DESC"
+	has_many :comments, :as => :commentable, :order => "((comments.up_votes - comments.down_votes) - 1 )/POW((((NOW()::abstime::int4 - comments.created_at::abstime::int4) / 3600 )+2), 1.5) DESC"
 	belongs_to :user
 	
 	attr_accessible :commentable_type, :commentable_id, :title, :text, :link
@@ -122,7 +122,7 @@ class Post < ActiveRecord::Base
 	# Whole method is static and has no dynimcs in it but it makes the SQL 
 	# statements a lot easier to read.
 	def self.order_algorithm
-		date_diff = "((UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(posts.created_at))"
+		date_diff = "((NOW()::abstime::int4 - posts.created_at::abstime::int4)"
 		order_algorithm = "((posts.up_votes - posts.down_votes) -1)/
 												POW((#{date_diff} / 3600)+2), 1.5)"
 	end
