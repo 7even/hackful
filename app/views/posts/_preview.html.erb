@@ -1,0 +1,25 @@
+<div class="post">
+	<% if user_signed_in? %>
+		<% if current_user.voted?(post) %>
+			<div class='voted arrow' id='posts_<%= post.id.to_s %>'>
+		<% else %>
+			<div class='vote arrow' id='posts_<%= post.id.to_s %>'>
+		<% end %>
+			<%= link_to "&#9650;".html_safe, "#", :onClick => "vote_up("+post.id.to_s+", 'posts'); return false" %>
+	<% else %>
+		<div class='vote arrow'>
+		<%= link_to "&#9650;".html_safe, new_user_session_path %>
+	<% end %>
+	</div>
+	<div class='post_preview_body'>
+	<div class='post_title'>		
+		<%= (post.link.nil? or post.link.empty?) ? (link_to post.title, post) : (link_to post.title, post.link) %>
+		<% uri = URI.parse(post.link) %> 
+		<% unless post.link.nil? or post.link.empty? or uri.host.nil? %>
+			<span class='host'><%= link_to("("+uri.host.gsub("www.","")+")", "http://"+uri.host) %> </span>
+		<% end %>	
+		</div>
+		<div class='infobar'><%= pluralize(post.votes, "point") %> by <%= (post.user.nil? ? "[Deleted]" : link_to(post.user.name, user_path(post.user.name))) %> <%= time_ago_in_words(post.created_at) %> ago | <%= link_to(pluralize(comment_count(post), "comment"), post) %>
+		</div>
+	</div>
+</div>
