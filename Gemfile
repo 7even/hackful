@@ -6,6 +6,7 @@ gem 'rails', '3.1.3'
 gem 'pg'
 gem 'json'
 
+gem 'oa-oauth', :require => 'omniauth/oauth'
 gem 'omniauth-twitter'
 
 gem 'haml'
