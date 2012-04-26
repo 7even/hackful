@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, 
          :token_authenticatable
 
+  devise :omniauthable
+
   cattr_accessor :current_user
 
   # Setup accessible (or protected) attributes for your model

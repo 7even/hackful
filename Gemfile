@@ -8,6 +8,10 @@ gem 'json'
 
 gem 'omniauth-twitter'
 
+gem 'haml'
+gem 'hpricot'
+gem 'ruby_parser'
+
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'

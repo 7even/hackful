@@ -1,0 +1,43 @@
+!!!
+%html
+  %head
+    %title
+      = @title
+      = " - " if @title.length > 0
+      Hackful Europe
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => @meta_keywords, :name => "keywords"}/
+    %meta{:content => @meta_description, :name => "description"}/
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = yield :head
+  %body
+    .header
+      %span.title
+        %img{:src => "/assets/hackful.png"}/
+        = link_to "Hackful Europe", "/"
+      %span.navigation
+        = link_to "top", "/"
+        = link_to "new", "/new"
+        = link_to "ask", "/ask"
+        = link_to "submit", "/posts/new"
+        - if user_signed_in?
+          - if current_user.notifications.where(:unread => true).count > 0
+            = link_to "&#9993;".html_safe, "/notifications", :class => "notification alert"
+          - else
+            = link_to "&#9993;".html_safe, "/notifications", :class => "notification"
+      %span.user
+        - if user_signed_in?
+          = link_to "&#9998;".html_safe, "/users/edit"
+          \&nbsp;#{link_to(current_user.name, user_path(current_user.name))}&nbsp;&nbsp;#{link_to('Sign out', destroy_user_session_path, :method => :delete)}
+        - else
+          = link_to('Sign in', new_user_session_path)
+    .notice= notice
+    .body
+      = yield
+    .footer
+      = link_to "About", "/about"
+      %span{:style => "float:right; padding-right: 10px; font-size: 8pt;"}
+        = User.all.count
+        users

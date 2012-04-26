@@ -1,0 +1,21 @@
+.comment
+  - if user_signed_in?
+    - if current_user.voted?(comment)
+      .voted.arrow{:id => "comments_#{comment.id.to_s}"}
+    - else
+      .vote.arrow{:id => "comments_#{comment.id.to_s}"}
+    = link_to "&#9650;".html_safe, "#", :onClick => "vote_up("+comment.id.to_s+", 'comments'); return false"
+  - else
+    .vote.arrow
+      = link_to "&#9650;".html_safe, new_user_session_path
+.text_body
+  = markdown(comment.text)
+  .infobar
+    = pluralize(comment.votes, "point")
+    by #{link_to(comment.user.name, user_path(comment.user.name))} #{time_ago_in_words(comment.created_at)} ago &nbsp;
+    - if can? :update, comment
+      = link_to 'Edit', edit_comment_path(comment)
+  = link_to('reply', "#", "onClick" => "$('#comment_form_#{comment.id.to_s}').slideToggle(); return false", class: "comment_reply") if can? :create, Comment
+  %br/
+.comment_form{:id => "comment_form_#{comment.id.to_s}", :style => "display: none"}
+  = render :partial => 'comments/form', :locals => { :commentable_type => "Comment", :commentable_id => comment.id }

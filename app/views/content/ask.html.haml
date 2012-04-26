@@ -1,0 +1,7 @@
+- content_for :head do
+  = auto_discovery_link_tag :rss, "/ask.rss"
+- @posts.each do |post|
+  = render partial: "posts/preview", locals: { post: post }
+%span.page_navigation
+  = link_to("< previous", "/ask?page="+(@page.to_i-1).to_s) if @page > 1
+  \&nbsp;&nbsp; #{link_to("next >", "/ask?page="+(@page.to_i+1).to_s) if @show_next_link}

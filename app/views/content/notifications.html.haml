@@ -1,0 +1,14 @@
+%h2 Notifications
+- @new_notifications.each do |notification|
+  .notification.new
+    %h2
+      = link_to(notification.alertable.user.name, user_path(notification.alertable.user.name))
+      replied to your #{notification.alerted.class.name}
+    = render :partial => "comments/show", :locals => { comment: notification.alertable }
+- @old_notifications.each do |notification|
+  .notification
+    %h2
+      = link_to(notification.alertable.user.name, user_path(notification.alertable.user.name))
+      replied to your #{notification.alerted.class.name}
+    = render :partial => "comments/show", :locals => { comment: notification.alertable }
+- @new_notifications.update_all(:unread => false)

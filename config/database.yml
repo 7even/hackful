@@ -1,6 +1,6 @@
 #this works on Ubuntu Linux, change for your OS.
 development:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: hackful
   username: root

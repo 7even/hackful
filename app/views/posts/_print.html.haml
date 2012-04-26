@@ -1,0 +1,25 @@
+.post
+  - if user_signed_in?
+    - if current_user.voted?(post)
+      .voted.arrow{:id => "posts_#{post.id.to_s}"}
+    - else
+      .vote.arrow{:id => "posts_#{post.id.to_s}"}
+    = link_to "&#9650;".html_safe, "#", :onClick => "vote_up("+post.id.to_s+", 'posts'); return false"
+  - else
+    .vote.arrow
+      = link_to "&#9650;".html_safe, new_user_session_path
+.text_body
+  %strong= (post.link.nil? or post.link.empty?) ? (link_to(post.title, post)) : (link_to(post.title, post.link))
+  - uri = URI.parse(post.link)
+  - unless post.link.nil? or post.link.empty? or uri.host.nil?
+    %span.host
+      = link_to("("+uri.host.gsub("www.","")+")", "http://"+uri.host)
+  %p.markup= markdown(post.text)
+  .infobar
+    = pluralize(post.votes, "point")
+    by #{(post.user.nil? ? "[Deleted]" : link_to(post.user.name, user_path(post.user.name)))} #{time_ago_in_words(post.created_at)} ago | #{link_to(pluralize(comment_count(post), "comment"), post)}
+    - if can? :update, post
+      = link_to 'Edit', edit_post_path(post)
+  - if can? :create, Comment
+    #comment_form.comment_form{:style => "clear: left; margin-left: 0px;"}
+      = render :partial => 'comments/form', :locals => { :commentable_type => "Post", :commentable_id => post.id }
