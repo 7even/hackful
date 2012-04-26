@@ -97,6 +97,7 @@ GEM
     ffi (1.0.11)
     gherkin (2.7.6)
       json (>= 1.4.6)
+    hashie (1.2.0)
     hike (1.2.1)
     i18n (0.6.0)
     jquery-rails (1.0.19)
@@ -116,6 +117,15 @@ GEM
     mime-types (1.17.2)
     multi_json (1.0.4)
     nokogiri (1.5.0)
+    oauth (0.4.6)
+    omniauth (1.1.0)
+      hashie (~> 1.2)
+      rack
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-twitter (0.0.9)
+      omniauth-oauth (~> 1.0)
     orm_adapter (0.0.6)
     pg (0.13.2)
     polyglot (0.3.3)
@@ -224,6 +234,7 @@ DEPENDENCIES
   launchy
   make_voteable
   nested_form!
+  omniauth-twitter
   pg
   pry
   rails (= 3.1.3)

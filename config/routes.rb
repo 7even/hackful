@@ -68,6 +68,7 @@ Hackful::Application.routes.draw do
   end
 
   devise_for :users
+  match '/auth/:provider/callback', to: 'sessions#create'
   
 
   # You can have the root of your site routed with "root"
