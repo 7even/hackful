@@ -23,7 +23,7 @@
         = link_to "top", "/"
         = link_to "new", "/new"
         = link_to "ask", "/ask"
-        = link_to "blog", "http://wordpress.com", {:target => "_blank"}
+        = link_to "blog", "http://posts.irglobe.com", {:target => "_blank"}
         = link_to "submit", "/posts/new"
         - if user_signed_in?
           - if current_user.notifications.where(:unread => true).count > 0
