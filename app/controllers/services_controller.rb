@@ -124,7 +124,7 @@ class ServicesController <  Devise::OmniauthCallbacksController
 
           # flash and sign in
           flash[:myinfo] = 'Your account has been created via ' + provider.capitalize + '. In your profile you can change your personal information and add a local password.'
-          sign_in
+          sign_in user
           redirect_to root_path
         end
       end
