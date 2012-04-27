@@ -1,14 +1,14 @@
 source 'http://rubygems.org'
 source 'http://gemcutter.org'
 
+gem 'thin'
+
 gem 'rails', '3.1.3'
 
 gem 'pg'
 gem 'json'
 
 gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
-#gem 'oa-oauth', :require => 'omniauth/oauth'
-#gem 'oa-openid', :require => 'omniauth/openid'
 gem 'omniauth-twitter'
 
 gem 'haml'
@@ -22,10 +22,9 @@ group :assets do
 end
 
 group :test, :development do
-  gem 'cucumber-rails'
+  gem 'annotate'
   gem 'database_cleaner'
   gem 'rspec-rails'
-  gem 'cucumber-rails', require: false
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'capybara-webkit'
@@ -46,6 +45,14 @@ group :test, :development do
   #  gem 'rb-fsevent'
   #  gem 'growl' # also install growlnotify from the Extras/growlnotify/growlnotify.pkg in Growl disk image
   #end
+end
+
+group :test do
+  gem 'cucumber-rails', require: false
+end
+
+group :development do
+  gem 'pry'
 end
 
 gem 'execjs'

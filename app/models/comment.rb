@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id               :integer         not null, primary key
+#  user_id          :integer
+#  text             :text
+#  commentable_id   :integer
+#  commentable_type :string(255)
+#  up_votes         :integer         default(0), not null
+#  down_votes       :integer         default(0), not null
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Comment < ActiveRecord::Base
 	include ActionView::Helpers::SanitizeHelper
   

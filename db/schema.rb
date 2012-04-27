@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120307155241) do
+ActiveRecord::Schema.define(:version => 20120427085917) do
 
   create_table "admin_auths", :force => true do |t|
     t.integer  "user_id"
@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(:version => 20120307155241) do
     t.text     "link"
     t.integer  "up_votes",   :default => 0, :null => false
     t.integer  "down_votes", :default => 0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "services", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "uname"
+    t.string   "uemail"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

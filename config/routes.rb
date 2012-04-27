@@ -1,27 +1,28 @@
 Hackful::Application.routes.draw do
-  get "admin/mail"
-  post "admin/send_newsletter"
+  get 'admin/mail'
+  post 'admin/send_newsletter'
 
-	match "/about" => "content#about"
-  match "/hackfulthon" => "content#hackfulthon"
+	match '/about' => 'content#about'
+  match '/hackfulthon' => 'content#hackfulthon'
 
-  match "/user/:name" => "users#show", :as => 'user'
+  match '/user/:name' => 'users#show', :as => 'user'
 	
   #Voting routes
-  match ":controller/:id/vote_up" => ":controller#vote_up"
-  match ":controller/:id/vote_down" => ":controller#vote_down"
+  match ':controller/:id/vote_up' => ':controller#vote_up'
+  match ':controller/:id/vote_down' => ':controller#vote_down'
   
-  match "/frontpage" => "content#frontpage"
-  match "/notifications" => "content#notifications"
+  match '/frontpage' => 'content#frontpage'
+  match '/notifications' => 'content#notifications'
 
-  match "/new" => "content#new"
-  match "/ask" => "content#ask"
+  match '/new' => 'content#new'
+  match '/ask' => 'content#ask'
 
   resources :comments
   resources :posts
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "services" }
   resources :users, has_one: :data_set
+  resources :services, :only => [:index, :create, :destroy]
 
   # /api/<request>
   #scope 'api' do
@@ -31,7 +32,7 @@ Hackful::Application.routes.draw do
   #               :controllers  => { :sessions => 'api/v1/sessions' },
   #               :path_names   => { :sign_in  => 'login',
   #                                  :sign_out => 'logout' },
-  #               :path         => "sessions",
+  #               :path         => 'sessions',
   #               :only         => :sessions
   #
   #    match 'signup'                      => 'api/v1/users#signup', via: :post
@@ -67,11 +68,11 @@ Hackful::Application.routes.draw do
   #  root :to => 'api/application#not_found'
   #end
 
-  # You can have the root of your site routed with "root"
+  # You can have the root of your site routed with 'root'
   # just remember to delete public/index.html.
   root :to => 'content#frontpage'
 
-  # See how all your routes lay out with "rake routes"
+  # See how all your routes lay out with 'rake routes'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer
+#  title      :string(255)
+#  text       :text
+#  link       :text
+#  up_votes   :integer         default(0), not null
+#  down_votes :integer         default(0), not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Post < ActiveRecord::Base
 	include Rails.application.routes.url_helpers
 
