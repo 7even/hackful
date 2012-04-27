@@ -76,8 +76,6 @@ class ServicesController <  Devise::OmniauthCallbacksController
     uid = omniauth['uid'] ? omniauth['uid'] : ''
     provider = omniauth['provider'] ? omniauth['provider'] : ''
 
-    render :text => email + "--" + name + "--" + uid and return
-
     # continue only if provider and uid exist
     if uid == '' or provider == ''
       flash[:error] = 'Error while authenticating '
