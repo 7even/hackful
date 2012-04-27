@@ -105,19 +105,19 @@ class ServicesController <  Devise::OmniauthCallbacksController
         existinguser = User.find_by_email(email)
         # we have such user in database
         if existinguser
-          existinguser.services.create(:provider => provider, :uid => uid, :uemail => email)
+          existinguser.services.create(:provider => provider, :uid => uid, :uname => SecureRandom.hex(6), :uemail => email)
           flash[:notice] = 'Sign in via ' + provider.capitalize + ' has been added to your account ' + existinguser.email + '. Signed in successfully!'
           sign_in_and_redirect(:user, existinguser)
         # no such user yet
         else
           # let's create a new user: register this user and add this authentication method for this user
-          name = name[0, 39] if name.length > 39             # otherwise our user validation will hit us
+          name = SecureRandom.hex(6)
           # new user, set email, a random password and take the name from the authentication service
           # twitter users does not have email, so we set it here to some value
-          user = User.new(:password => SecureRandom.hex(10), :email => email)
+          user = User.new(:password => SecureRandom.hex(10), :name => name, :email => email)
 
           # add this authentication service to our new user
-          user.services.build(:provider => provider, :uid => uid, :uemail => email)
+          user.services.build(:provider => provider, :uid => uid, :uname => name, :uemail => email)
 
           # do not send confirmation email, we directly save and confirm the new record
           user.save!
