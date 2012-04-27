@@ -6,9 +6,9 @@ gem 'rails', '3.1.3'
 gem 'pg'
 gem 'json'
 
-gem 'omniauth', '>=0.2.0.beta'
-gem 'oa-oauth', :require => 'omniauth/oauth'
-gem 'oa-openid', :require => 'omniauth/openid'
+gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
+#gem 'oa-oauth', :require => 'omniauth/oauth'
+#gem 'oa-openid', :require => 'omniauth/openid'
 gem 'omniauth-twitter'
 
 gem 'haml'

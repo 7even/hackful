@@ -3,9 +3,9 @@ development:
   adapter: postgresql
   encoding: utf8
   database: hackful
-  username: root
+  username: kiote
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  host: localhost
 
 test: &test
   adapter: mysql2
