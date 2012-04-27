@@ -114,7 +114,7 @@ class ServicesController <  Devise::OmniauthCallbacksController
           name = name[0, 39] if name.length > 39             # otherwise our user validation will hit us
           # new user, set email, a random password and take the name from the authentication service
           # twitter users does not have email, so we set it here to some value
-          user = User.new(:password => SecureRandom.hex(10), :name => name, :email => email)
+          user = User.new(:password => SecureRandom.hex(10), :email => email)
 
           # add this authentication service to our new user
           user.services.build(:provider => provider, :uid => uid, :uname => name, :uemail => email)
