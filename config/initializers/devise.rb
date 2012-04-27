@@ -58,7 +58,7 @@ Devise.setup do |config|
   # config.http_authenticatable = false
 
   # If http headers should be returned for AJAX requests. True by default.
-  config.http_authenticatable_on_xhr = false
+  # config.http_authenticatable_on_xhr = true
 
   # The realm used in Http Basic Authentication. "Application" by default.
   # config.http_authentication_realm = "Application"
@@ -85,7 +85,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "fdefeb4f48c980b478799f703fe76375290cdefa9144a9845df8a9127002700e4daaaa29900093bc7f388fc90bdb62f9c72fcbdac13e254d73a585f8c79cdee5"
+  # config.pepper = "f001024f702c9986d097c7aecedd28eaf0e32752e0777e6a8d78ee3200c8025898e110dffff1dc68d97d0bbd123f2d66817decd66a7cd2d685187ced2d8dffb0"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -176,13 +176,13 @@ Devise.setup do |config|
 
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
-  config.token_authentication_key = :auth_token
+  # config.token_authentication_key = :auth_token
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  config.scoped_views = true
+  # config.scoped_views = false
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -202,7 +202,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  config.navigational_formats = ["*/*", :html, :json]
+  # config.navigational_formats = ["*/*", :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -210,7 +210,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  config.omniauth :twitter, "l4DOM9Oh3oeVh3eQF3jz9w", "UNaqUmB9SayRQUmx6x4qSX4rC8Qhs5eZbdHNBHI3uqc"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
