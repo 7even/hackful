@@ -69,7 +69,6 @@ class ServicesController <  Devise::OmniauthCallbacksController
   def facebook
     omniauth = request.env['omniauth.auth']
 
-    render :text => omniauth.to_yaml and return
     render :text => 'Error: Omniauth is empty' and return unless omniauth
 
     email = omniauth['info']['email'] ? omniauth['info']['email'] : ''
@@ -106,13 +105,13 @@ class ServicesController <  Devise::OmniauthCallbacksController
         existinguser = User.find_by_email(email)
         # we have such user in database
         if existinguser
-          existinguser.services.create(:provider => provider, :uid => uid, :uname => SecureRandom.hex(6), :uemail => email)
+          existinguser.services.create(:provider => provider, :uid => uid, :uname => name, :uemail => email)
           flash[:notice] = 'Sign in via ' + provider.capitalize + ' has been added to your account ' + existinguser.email + '. Signed in successfully!'
           sign_in_and_redirect(:user, existinguser)
         # no such user yet
         else
           # let's create a new user: register this user and add this authentication method for this user
-          name = SecureRandom.hex(6)
+          name = name[0, 39] if name.length > 39
           # new user, set email, a random password and take the name from the authentication service
           # twitter users does not have email, so we set it here to some value
           user = User.new(:password => SecureRandom.hex(10), :name => name, :email => email)

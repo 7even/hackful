@@ -47,9 +47,9 @@ class User < ActiveRecord::Base
 	accepts_nested_attributes_for :data_set
 	
 	validates_uniqueness_of :name
-	validates_format_of :name, :with => /\A[a-zA-Z0-9]+\z/i,
-	:message => "can only contain letters and numbers."
-	
+	#validates_format_of :name, :with => /\A[a-zA-Z0-9]+\z/i,
+	#:message => "can only contain letters and numbers."
+
 	make_voter
 
   def all_notifications
