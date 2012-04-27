@@ -105,7 +105,7 @@ class ServicesController <  Devise::OmniauthCallbacksController
         existinguser = User.find_by_email(email)
         # we have such user in database
         if existinguser
-          existinguser.services.create(:provider => provider, :uid => uid, :uname => name, :uemail => email)
+          existinguser.services.create(:provider => provider, :uid => uid, :uemail => email)
           flash[:notice] = 'Sign in via ' + provider.capitalize + ' has been added to your account ' + existinguser.email + '. Signed in successfully!'
           sign_in_and_redirect(:user, existinguser)
         # no such user yet
@@ -117,7 +117,7 @@ class ServicesController <  Devise::OmniauthCallbacksController
           user = User.new(:password => SecureRandom.hex(10), :email => email)
 
           # add this authentication service to our new user
-          user.services.build(:provider => provider, :uid => uid, :uname => name, :uemail => email)
+          user.services.build(:provider => provider, :uid => uid, :uemail => email)
 
           # do not send confirmation email, we directly save and confirm the new record
           user.save!
