@@ -6,7 +6,8 @@ gem 'rails', '3.1.3'
 gem 'pg'
 gem 'json'
 
-gem 'omniauth'
+gem 'omniauth', '>=0.2.0.beta'
+gem 'oa-oauth', :require => 'omniauth/oauth'
 gem 'omniauth-twitter'
 
 gem 'haml'
@@ -48,7 +49,7 @@ end
 
 gem 'execjs'
 gem 'therubyracer'
-gem 'devise'
+gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 gem 'nested_form', :git => 'git://github.com/fxposter/nested_form.git'
 gem 'jquery-rails'
 gem 'cancan'
