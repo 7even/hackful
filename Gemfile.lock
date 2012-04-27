@@ -110,6 +110,8 @@ GEM
     faker (1.0.1)
       i18n (~> 0.4)
     fakeweb (1.3.0)
+    faraday (0.8.0)
+      multipart-post (~> 1.1)
     ffi (1.0.11)
     gherkin (2.7.6)
       json (>= 1.4.6)
@@ -117,6 +119,7 @@ GEM
     hashie (1.2.0)
     hike (1.2.1)
     hpricot (0.8.6)
+    httpauth (0.1)
     i18n (0.6.0)
     jquery-rails (1.0.19)
       railties (~> 3.0)
@@ -134,10 +137,20 @@ GEM
     method_source (0.7.1)
     mime-types (1.17.2)
     multi_json (1.0.4)
+    multipart-post (1.1.5)
     nokogiri (1.5.0)
     oauth (0.4.6)
+    oauth2 (0.6.0)
+      faraday (~> 0.7)
+      httpauth (~> 0.1)
+      multi_json (~> 1.0)
+    omniauth-facebook (1.2.0)
+      omniauth-oauth2 (~> 1.0.0)
     omniauth-oauth (1.0.1)
       oauth
+      omniauth (~> 1.0)
+    omniauth-oauth2 (1.0.1)
+      oauth2 (~> 0.6.0)
       omniauth (~> 1.0)
     omniauth-twitter (0.0.9)
       omniauth-oauth (~> 1.0)
@@ -260,6 +273,7 @@ DEPENDENCIES
   make_voteable
   nested_form!
   omniauth!
+  omniauth-facebook
   omniauth-twitter
   pg
   pry

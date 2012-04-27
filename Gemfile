@@ -10,6 +10,7 @@ gem 'json'
 
 gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 gem 'haml'
 gem 'hpricot'
