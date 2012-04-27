@@ -69,6 +69,7 @@ class ServicesController <  Devise::OmniauthCallbacksController
   def facebook
     omniauth = request.env['omniauth.auth']
 
+    render :text => request.env['omniauth.auth'].to_yaml and return
     render :text => 'Error: Omniauth is empty' and return unless omniauth
 
     email = omniauth['extra']['user_hash']['email'] ? omniauth['extra']['user_hash']['email'] : ''
