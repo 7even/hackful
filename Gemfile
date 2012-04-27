@@ -8,6 +8,7 @@ gem 'json'
 
 gem 'omniauth', '>=0.2.0.beta'
 gem 'oa-oauth', :require => 'omniauth/oauth'
+gem 'oa-openid', :require => 'omniauth/openid'
 gem 'omniauth-twitter'
 
 gem 'haml'
