@@ -1,8 +1,10 @@
+# see http://www.communityguides.eu/articles/11
 class ServicesController <  Devise::OmniauthCallbacksController
   def index
 
   end
 
+  # TODO: make one method
   def twitter
     omniauth = request.env['omniauth.auth']
 

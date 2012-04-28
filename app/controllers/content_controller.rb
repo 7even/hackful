@@ -52,4 +52,8 @@ class ContentController < ApplicationController
     render layout: false
   end
 
+  def welcome
+
+  end
+
 end
