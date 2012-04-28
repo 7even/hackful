@@ -20,6 +20,7 @@
       %span.navigation
         - if user_signed_in? && current_user.sign_in_count < 7
           = link_to "welcome", "/welcome"
+        = link_to "jobs", "/jobs"
         = link_to "top", "/"
         = link_to "new", "/new"
         = link_to "ask", "/ask"

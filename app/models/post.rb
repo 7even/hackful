@@ -43,7 +43,11 @@ class Post < ActiveRecord::Base
 	# (see <tt>Post.order_algorithm</tt> for order algorithm).
 	def self.find_ask(page = nil)
 		self.find_ordered self.offset(page), "link = ''"
-	end
+  end
+
+  def self.find_jobs(page = nil)
+    self.find_ordered self.offset(page), "is_job"
+  end
 
 	# Finds new posts with given page and DESC ordering.
 	def self.find_new(page = nil)
@@ -120,7 +124,7 @@ class Post < ActiveRecord::Base
 		sql = "SELECT * FROM posts 
 					 #{where}
 		 			 ORDER BY #{order_algorithm}
-			 		 DESC LIMIT ? OFFSET 20"
+			 		 DESC LIMIT 20 OFFSET ?"
 
 		Post.find_by_sql [sql, offset]
 	end

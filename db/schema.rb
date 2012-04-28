@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120427085917) do
+ActiveRecord::Schema.define(:version => 20120428093512) do
 
   create_table "admin_auths", :force => true do |t|
     t.integer  "user_id"
@@ -77,10 +77,11 @@ ActiveRecord::Schema.define(:version => 20120427085917) do
     t.string   "title"
     t.text     "text"
     t.text     "link"
-    t.integer  "up_votes",   :default => 0, :null => false
-    t.integer  "down_votes", :default => 0, :null => false
+    t.integer  "up_votes",   :default => 0,     :null => false
+    t.integer  "down_votes", :default => 0,     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_job",     :default => false, :null => false
   end
 
   create_table "services", :force => true do |t|

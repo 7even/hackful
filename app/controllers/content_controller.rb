@@ -31,6 +31,17 @@ class ContentController < ApplicationController
 			f.rss { render :layout => false }
 		end
   end
+
+  def jobs
+    @page = page_number(params[:page])
+    @posts = Post.find_jobs(@page)
+    @show_next_link = (Post.find_frontpage(@page+1).length > 0)
+
+    respond_to do |f|
+      f.html
+      f.rss { render :layout => false }
+    end
+  end
   
   def about
 		respond_to do |f|

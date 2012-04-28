@@ -16,6 +16,7 @@ Hackful::Application.routes.draw do
 
   match '/new' => 'content#new'
   match '/ask' => 'content#ask'
+  match '/jobs' => 'content#jobs'
 
   match '/welcome' => 'content#welcome'
 
