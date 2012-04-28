@@ -23,3 +23,14 @@
   - if can? :create, Comment
     #comment_form.comment_form{:style => "clear: left; margin-left: 0px;"}
       = render :partial => 'comments/form', :locals => { :commentable_type => "Post", :commentable_id => post.id }
+
+  %p
+    Share:
+    .addthis_toolbox.addthis_default_style
+      %a{class: "addthis_button_preferred_1"}
+      %a{class: "addthis_button_preferred_2"}
+      %a{class: "addthis_button_preferred_3"}
+      %a{class: "addthis_button_preferred_4"}
+      %a{class: "addthis_button_compact"}
+      %a{class: "addthis_counter addthis_bubble_style"}
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f9bc8cd199d0b56"></script>
