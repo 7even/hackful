@@ -8,9 +8,9 @@ module ApplicationHelper
 	end
 	
 	def markdown(text, *options)
-		require 'rdiscount'
+    require 'moredown'
 
-		text = sanitize(text) unless text.html_safe? || options.delete(:safe)
-		(text.blank? ? "" : RDiscount.new(text, :filter_html, :autolink ).to_html.gsub(/(?<!\w)(@(\w+))/, '<a href="http://twitter.com/\2">\1</a>').html_safe)
+    text = sanitize(text) unless text.html_safe? || options.delete(:safe)
+    Moredown.text_to_html(text).gsub(/(?<!\w)(@(\w+))/, '<a href="http://twitter.com/\2">\1</a>').html_safe
 	end
 end
