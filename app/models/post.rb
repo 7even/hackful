@@ -19,12 +19,12 @@ class Post < ActiveRecord::Base
 	has_many :comments, :as => :commentable, :order => "((comments.up_votes - comments.down_votes) - 1 )/POW((((NOW()::abstime::int4 - comments.created_at::abstime::int4) / 3600 )+2), 1.5) DESC"
 	belongs_to :user
 	
-	attr_accessible :commentable_type, :commentable_id, :title, :text, :link
+	attr_accessible :commentable_type, :commentable_id, :title, :text, :link, :is_job
 	
 	validates :link, :format => URI::regexp(%w(http https)), :allow_blank => true
 	validates :title, :length => { :maximum => 255 }, :allow_blank => false
 	validates :text, :length => { :minimum => 2 }, :allow_blank => false
-	
+
 	make_voteable
 
 	# Finds user posts with given page and standard ordering 
@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
 	# Finds frontpage posts with given page and standard ordering 
 	# (see <tt>Post.order_algorithm</tt> for order algorithm).
 	def self.find_frontpage(page = nil)
-		self.find_ordered self.offset(page)
+		self.find_ordered(self.offset(page), "not is_job")
 	end
 
 	# Finds ask posts with given page and standard ordering 
@@ -52,7 +52,7 @@ class Post < ActiveRecord::Base
 	# Finds new posts with given page and DESC ordering.
 	def self.find_new(page = nil)
 		offset = self.offset(page)
-		Post.find(:all, :order => "created_at DESC", :limit => 20, :offset => offset)
+		Post.order("created_at DESC").limit(20).offset(offset)
 	end
 
 	# Overrides standard as_json and a adds user, comment count, path and vote 
