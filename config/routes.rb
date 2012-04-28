@@ -20,6 +20,8 @@ Hackful::Application.routes.draw do
 
   match '/welcome' => 'content#welcome'
 
+  match '/search' => 'search#index'
+
   resources :comments
   resources :posts
 
