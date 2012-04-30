@@ -8,6 +8,14 @@
   - else
     .vote.arrow
       = link_to "&#9650;".html_safe, new_user_session_path
+- if post.snippet[:title].present?
+  .preview_link
+    = image_tag post.snippet[:img], :width => 100
+    .title
+      = post.snippet[:title]
+    .description
+      = post.snippet[:text]
+  .clear
 .text_body
   %strong= (post.link.nil? or post.link.empty?) ? (link_to(post.title, post)) : (link_to(post.title, post.link))
   - uri = URI.parse(post.link)

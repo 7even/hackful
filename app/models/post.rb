@@ -16,6 +16,8 @@
 class Post < ActiveRecord::Base
 	include Rails.application.routes.url_helpers
 
+  serialize :snippet, Hash
+
 	has_many :comments, :as => :commentable, :order => "((comments.up_votes - comments.down_votes) - 1 )/POW((((NOW()::abstime::int4 - comments.created_at::abstime::int4) / 3600 )+2), 1.5) DESC"
 	belongs_to :user
 	

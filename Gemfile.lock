@@ -98,6 +98,8 @@ GEM
       activerecord (> 2.1.0)
       delayed_job (~> 3.0.0)
     diff-lcs (1.1.3)
+    domain_name (0.5.3)
+      unf (~> 0.0.3)
     erubis (2.7.0)
     eventmachine (0.12.10)
     execjs (1.3.0)
@@ -134,12 +136,23 @@ GEM
       treetop (~> 1.4.8)
     make_voteable (0.1.1)
       activerecord (~> 3.0)
+    mechanize (2.4)
+      domain_name (~> 0.5, >= 0.5.1)
+      mime-types (~> 1.17, >= 1.17.2)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (~> 0.0, >= 0.0.9)
     method_source (0.7.1)
     mime-types (1.17.2)
     moredown (1.3.0)
     multi_json (1.0.4)
     multipart-post (1.1.5)
+    net-http-digest_auth (1.2)
+    net-http-persistent (2.6)
     nokogiri (1.5.0)
+    ntlm-http (0.1.1)
     oauth (0.4.6)
     oauth2 (0.6.0)
       faraday (~> 0.7)
@@ -222,6 +235,8 @@ GEM
       rubyzip
     sexp_processor (3.1.0)
     slop (2.4.4)
+    snippet (0.0.2)
+      mechanize
     sprockets (2.0.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -244,8 +259,12 @@ GEM
     uglifier (1.2.2)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    unf (0.0.5)
+      unf_ext
+    unf_ext (0.0.4)
     warden (1.1.1)
       rack (>= 1.0)
+    webrobots (0.0.13)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -286,6 +305,7 @@ DEPENDENCIES
   rspec-rails
   ruby_parser
   sass-rails (~> 3.1.5)
+  snippet
   texticle
   therubyracer
   thin

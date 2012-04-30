@@ -40,6 +40,8 @@ class PostsController < FilterController
   def create
     @post = Post.new(params[:post])
     @post.user_id = current_user.id
+    sn = Snippet.new(params["post"]["link"])
+    @post.snippet = sn.get_meta
 
     respond_to do |format|
       if @post.save

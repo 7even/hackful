@@ -69,3 +69,5 @@ gem 'delayed_job'
 gem 'delayed_job_active_record'
 
 gem 'texticle', :require => 'texticle/rails'
+
+gem 'snippet'

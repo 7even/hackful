@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428093512) do
+ActiveRecord::Schema.define(:version => 20120430164449) do
 
   create_table "admin_auths", :force => true do |t|
     t.integer  "user_id"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120428093512) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_job",     :default => false, :null => false
+    t.string   "snippet"
   end
 
   create_table "services", :force => true do |t|
