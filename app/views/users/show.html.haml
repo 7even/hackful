@@ -1,6 +1,15 @@
 %h1
   = @user.name
   's profile:
+
+- if @user.name.present?
+  username:
+  =@user.name
+%br/
+created:
+=time_ago_in_words(@user.created_at)
+ago
+
 %h4
   Submitted Stories: #{@user.posts.count}
 - @posts.each do |post|
