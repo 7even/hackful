@@ -1,3 +1,18 @@
 %h1 Search results:
-- @posts.each do |post|
-  = render partial: "posts/preview", locals: { post: post }
+- if @posts.present?
+  %h2
+    Posts found:
+  - @posts.each do |post|
+    = render partial: "posts/preview", locals: { post: post }
+
+- if @users.present?
+  %h2
+    Users found:
+  - @users.each do |user|
+    = link_to(user.name, user_path(user.name))
+
+- if @comments.present?
+  %h2
+    Comments in posts found:
+  - @comments.each do |comment|
+    = render partial: "posts/preview", locals: { post: comment.commentable }
