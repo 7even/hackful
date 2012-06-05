@@ -9,8 +9,8 @@ class ServicesController <  Devise::OmniauthCallbacksController
     omniauth = request.env['omniauth.auth']
 
     render :text => 'Error: Omniauth is empty' and return unless omniauth
-    name = omniauth['extra']['access_token'].params[:screen_name] ? omniauth['extra']['access_token'].params[:screen_name] : ''
-    uid = omniauth['extra']['access_token'].params[:user_id] ? omniauth['extra']['access_token'].params[:user_id] : ''
+    name = omniauth['extra']['access_token'].params[:screen_name] || ''
+    uid = omniauth['extra']['access_token'].params[:user_id] || ''
     provider = omniauth['provider'] ? omniauth['provider'] : ''
 
     # continue only if provider and uid exist
@@ -61,7 +61,7 @@ class ServicesController <  Devise::OmniauthCallbacksController
 
           # flash and sign in
           flash[:myinfo] = 'Your account has been created via ' + provider.capitalize + '. In your profile you can change your personal information and add a local password.'
-          sign_in
+          sign_in user
           redirect_to root_path
         end
       end

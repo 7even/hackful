@@ -2,18 +2,18 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: hackful
-  username: kiote
+  database: hackful_dev
+  username: 7even
   password:
-  host: localhost
+  host:     localhost
 
 test: &test
-  adapter: mysql2
+  adapter:  postgresql
   encoding: utf8
   database: hackful_test
-  username: root
+  username: 7even
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  host:     localhost
 
 cucumber:
   <<: *test

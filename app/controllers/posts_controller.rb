@@ -2,7 +2,7 @@ class PostsController < FilterController
   # GET /posts
   # GET /posts.json
   def index
-    redirect_to "/"
+    redirect_to root_path
   end
 
   # GET /posts/1
@@ -11,7 +11,7 @@ class PostsController < FilterController
     @post = Post.find(params[:id])
     @title = @post.title
     @parent_comments = @post.comments
-		@comment = Comment.new
+    @comment = Comment.new
 
     respond_to do |format|
       format.html
@@ -40,12 +40,12 @@ class PostsController < FilterController
   def create
     @post = Post.new(params[:post])
     @post.user_id = current_user.id
-    sn = Snippet.new(params["post"]["link"])
+    sn = Snippet.new(params['post']['link'])
     @post.snippet = sn.get_meta
 
     respond_to do |format|
       if @post.save
-				current_user.up_vote!(@post)
+        current_user.up_vote!(@post)
         format.html { redirect_to @post, :notice => 'Post was successfully created.' }
         format.json { render :json => @post, :status => :created, :location => @post }
       else

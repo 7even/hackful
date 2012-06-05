@@ -2,15 +2,16 @@ Hackful::Application.routes.draw do
   get 'admin/mail'
   post 'admin/send_newsletter'
 
-	match '/about' => 'content#about'
+  match '/welcome' => 'content#welcome'
+  match '/about' => 'content#about'
   match '/hackfulthon' => 'content#hackfulthon'
 
   match '/user/:name' => 'users#show', :as => 'user'
-	
+
   #Voting routes
   match ':controller/:id/vote_up' => ':controller#vote_up'
   match ':controller/:id/vote_down' => ':controller#vote_down'
-  
+
   match '/frontpage' => 'content#frontpage'
   match '/notifications' => 'content#notifications'
 
@@ -18,7 +19,6 @@ Hackful::Application.routes.draw do
   match '/ask' => 'content#ask'
   match '/jobs' => 'content#jobs'
 
-  match '/welcome' => 'content#welcome'
 
   match '/search' => 'search#index'
 

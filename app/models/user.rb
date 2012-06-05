@@ -55,8 +55,8 @@ class User < ActiveRecord::Base
   def all_notifications
     {
       :new_notifications => self.notifications.where(:unread => true),
-      :old_notifications => self.notifications.find(:all, 
-        :conditions => { :unread => false }, :limit => 20)      
+      :old_notifications => self.notifications.find(:all,
+        :conditions => { :unread => false }, :limit => 20)
     }
   end
 
