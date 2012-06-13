@@ -11,6 +11,8 @@
 #  down_votes :integer         default(0), not null
 #  created_at :datetime
 #  updated_at :datetime
+#  is_job     :boolean         default(FALSE), not null
+#  snippet    :string(255)
 #
 
 class Post < ActiveRecord::Base
