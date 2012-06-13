@@ -34,17 +34,17 @@ group :test, :development do
   gem 'faker'
   gem 'pry'
   gem 'rest-client'
-
-  #if RUBY_PLATFORM.downcase.include?('darwin')
-  #  gem 'guard'
-  #  gem 'guard-rspec'
-  #  gem 'guard-cucumber'
-  #  gem 'guard-bundler'
-  #  gem 'guard-spork'
-  #  gem 'spork'
-  #  gem 'rb-fsevent'
-  #  gem 'growl' # also install growlnotify from the Extras/growlnotify/growlnotify.pkg in Growl disk image
-  #end
+  
+  # if RUBY_PLATFORM.downcase.include?('darwin')
+  #   gem 'guard'
+  #   gem 'guard-rspec'
+  #   gem 'guard-cucumber'
+  #   gem 'guard-bundler'
+  #   gem 'guard-spork'
+  #   gem 'spork'
+  #   gem 'rb-fsevent'
+  #   gem 'growl' # also install growlnotify from the Extras/growlnotify/growlnotify.pkg in Growl disk image
+  # end
 end
 
 group :test do
@@ -52,7 +52,8 @@ group :test do
 end
 
 group :development do
-  gem 'pry'
+  gem 'pry-rails'
+  gem 'awesome_print'
 end
 
 gem 'execjs'
@@ -70,3 +71,6 @@ gem 'delayed_job_active_record'
 gem 'texticle', :require => 'texticle/rails'
 
 gem 'snippet'
+
+gem 'activeadmin'
+gem 'meta_search', '>= 1.1.0.pre'

@@ -1,4 +1,8 @@
 Hackful::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   get 'admin/mail'
   post 'admin/send_newsletter'
 
