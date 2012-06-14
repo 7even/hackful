@@ -7,7 +7,7 @@ ActiveAdmin.register User do
     column :email
     column :up_votes
     column :down_votes
-    column :banned
+    bool_column :banned
     
     default_actions
   end
@@ -18,7 +18,7 @@ ActiveAdmin.register User do
       row :email
       row :up_votes
       row :down_votes
-      row :banned
+      bool_row :banned
     end
   end
   

@@ -17,48 +17,51 @@
 
 class Post < ActiveRecord::Base
   include Rails.application.routes.url_helpers
-
+  
   serialize :snippet, Hash
-
+  
   has_many :comments, :as => :commentable, :order => "((comments.up_votes - comments.down_votes) - 1 )/POW((((NOW()::abstime::int4 - comments.created_at::abstime::int4) / 3600 )+2), 1.5) DESC"
   belongs_to :user
   
-  attr_accessible :commentable_type, :commentable_id, :title, :text, :link, :is_job
+  USER_ACCESSIBLE_ATTRS = [:commentable_type, :commentable_id, :title, :text, :link, :is_job]
+  ADMIN_ACCESSIBLE_ATTRS = USER_ACCESSIBLE_ATTRS + [:promoted]
+  attr_accessible *USER_ACCESSIBLE_ATTRS
+  attr_accessible *ADMIN_ACCESSIBLE_ATTRS, as: :admin
   
   validates :link, :format => URI::regexp(%w(http https)), :allow_blank => true
   validates :title, :length => { :maximum => 255 }, :allow_blank => false
   validates :text, :length => { :minimum => 2 }, :allow_blank => false
-
+  
   make_voteable
-
+  
   # Finds user posts with given page and standard ordering 
   # (see <tt>Post.order_algorithm</tt> for order algorithm).
   def self.find_user_posts(user, page = nil)
     self.find_ordered self.offset(page), "user_id = #{user.id}"
   end
-
+  
   # Finds frontpage posts with given page and standard ordering 
   # (see <tt>Post.order_algorithm</tt> for order algorithm).
   def self.find_frontpage(page = nil)
     self.find_ordered(self.offset(page), "not is_job")
   end
-
+  
   # Finds ask posts with given page and standard ordering 
   # (see <tt>Post.order_algorithm</tt> for order algorithm).
   def self.find_ask(page = nil)
     self.find_ordered self.offset(page), "link = ''"
   end
-
+  
   def self.find_jobs(page = nil)
     self.find_ordered self.offset(page), "is_job"
   end
-
+  
   # Finds new posts with given page and DESC ordering.
   def self.find_new(page = nil)
     offset = self.offset(page)
     Post.order("created_at DESC").limit(20).offset(offset)
   end
-
+  
   # Overrides standard as_json and a adds user, comment count, path and vote 
   # status to post json.
   #
@@ -88,17 +91,17 @@ class Post < ActiveRecord::Base
       :methods => [:comment_count, :path, :voted]
     )
   end
-
+  
   # Returns comment count.
   def comment_count
     Post.count_all_comments(comments)
   end
-
+  
   # Return path for post.
   def path
     post_path(self)
   end
-
+  
   # Checks if current logged in user has upvoted the post or not.
   # If no current user exists, it will return false.
   def voted
@@ -126,12 +129,12 @@ private
     where = where.nil? ? "" : "WHERE #{where}"
     sql = "SELECT * FROM posts 
            #{where}
-           ORDER BY #{order_algorithm}
+           ORDER BY promoted DESC, #{order_algorithm}
            DESC LIMIT 20 OFFSET ?"
-
+    
     Post.find_by_sql [sql, offset]
   end
-
+  
   # Converts a page number into offset for limiting database queries.
   # If page is nil or smaller than <tt>1</tt> page value will be set 
   # to <tt>1</tt>. 
@@ -139,7 +142,7 @@ private
     if page.nil? or page.blank? or page.to_i < 1 then page = 1 end
     offset = ((page.to_i-1)*20)
   end
-
+  
   # Contains the order algorithm for content pages like frontpage, ask and new.
   # Whole method is static and has no dynimcs in it but it makes the SQL 
   # statements a lot easier to read.
@@ -147,7 +150,7 @@ private
     date_diff = '((NOW()::abstime::int4 - posts.created_at::abstime::int4)'
     order_algorithm = "((posts.up_votes - posts.down_votes) -1) / POW((#{date_diff} / 3600) + 2), 1.5)"
   end
-
+  
   # Counts all comments of a post recursively.
   # This is needed cause all comments are stored as children of a commentable 
   # object. So we can't just do <tt>post.comments.length</tt>. We need to 
