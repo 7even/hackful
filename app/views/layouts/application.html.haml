@@ -25,7 +25,8 @@
         = link_to "new", "/new"
         = link_to "ask", "/ask"
         = link_to "blog", "http://posts.irglobe.com", {:target => "_blank"}
-        = link_to "submit", "/posts/new"
+        - if can? :create, Post
+          = link_to "submit", "/posts/new"
         %form{:action => '/search', :class => "search"}
           %input{:name => "s", :type => "text", :placeholder => "Search"}
 

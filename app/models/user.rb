@@ -20,6 +20,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  authentication_token   :string(255)
+#  banned                 :boolean
 #
 
 class User < ActiveRecord::Base
@@ -30,16 +31,19 @@ class User < ActiveRecord::Base
          :token_authenticatable, :omniauthable, :authentication_keys => [:name]
   
   cattr_accessor :current_user
-  #attr_accessor :name
-  #attr_accessible :name
+  # attr_accessor :name
+  # attr_accessible :name
   
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :data_set_attributes
+  USER_ACCESSIBLE_ATTRS = [:email, :password, :password_confirmation, :remember_me, :name, :data_set_attributes]
+  ADMIN_ACCESSIBLE_ATTRS = USER_ACCESSIBLE_ATTRS + [:banned]
+  attr_accessible *USER_ACCESSIBLE_ATTRS
+  attr_accessible *ADMIN_ACCESSIBLE_ATTRS, as: :admin
   
   has_many :votes, :as => :voteable
   has_many :comments
   has_many :posts
-  has_many :notifications, :order => "created_at DESC"
+  has_many :notifications, :order => 'created_at DESC'
   has_many :admin_auths
   has_many :services, :dependent => :destroy
   
@@ -47,16 +51,14 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :data_set
   
   validates_uniqueness_of :name
-  #validates_format_of :name, :with => /\A[a-zA-Z0-9]+\z/i,
-  #:message => "can only contain letters and numbers."
+  # validates_format_of :name, with: /\A[a-zA-Z0-9]+\z/i, message: 'can only contain letters and numbers.'
   
   make_voter
   
   def all_notifications
     {
-      :new_notifications => self.notifications.where(:unread => true),
-      :old_notifications => self.notifications.find(:all,
-        :conditions => { :unread => false }, :limit => 20)
+      new_notifications: self.notifications.where(unread: true),
+      old_notifications: self.notifications.find(:all, conditions: {unread: false}, limit: 20)
     }
   end
 end

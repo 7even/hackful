@@ -1,10 +1,11 @@
 .post
   - if user_signed_in?
-    - if current_user.voted?(post)
-      .voted.arrow{:id => "posts_#{post.id.to_s}"}
-    - else
-      .vote.arrow{:id => "posts_#{post.id.to_s}"}
-    = link_to "&#9650;".html_safe, "#", :onClick => "vote_up("+post.id.to_s+", 'posts'); return false"
+    - unless current_user.banned?
+      - if current_user.voted?(post)
+        .voted.arrow{:id => "posts_#{post.id.to_s}"}
+      - else
+        .vote.arrow{:id => "posts_#{post.id.to_s}"}
+      = link_to "&#9650;".html_safe, "#", :onClick => "vote_up("+post.id.to_s+", 'posts'); return false"
   - else
     .vote.arrow
       = link_to "&#9650;".html_safe, new_user_session_path

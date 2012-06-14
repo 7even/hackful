@@ -72,13 +72,17 @@ class PostsController < FilterController
   end
   
   def vote_up
-		current_user.up_vote(Post.find(params[:id]))
+    post = Post.find(params[:id])
+    current_user.up_vote(post)
+    head :ok
   end
   
   def vote_down
-		current_user.down_vote(Post.find(params[:id]))
+    post = Post.find(params[:id])
+    current_user.down_vote(post)
+    head :ok
   end
-
+  
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy

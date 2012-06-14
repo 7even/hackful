@@ -7,6 +7,7 @@ ActiveAdmin.register User do
     column :email
     column :up_votes
     column :down_votes
+    column :banned
     
     default_actions
   end
@@ -17,6 +18,7 @@ ActiveAdmin.register User do
       row :email
       row :up_votes
       row :down_votes
+      row :banned
     end
   end
   
@@ -24,8 +26,13 @@ ActiveAdmin.register User do
     f.inputs 'Details' do
       f.input :name
       f.input :email
+      f.input :banned
     end
     
     f.buttons
+  end
+  
+  controller do
+    with_role :admin
   end
 end
