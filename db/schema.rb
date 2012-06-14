@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20120614024636) do
     t.datetime "updated_at"
     t.boolean  "is_job",     :default => false, :null => false
     t.string   "snippet"
-    t.boolean  "promoted"
+    t.boolean  "promoted",   :default => false
   end
 
   create_table "services", :force => true do |t|
