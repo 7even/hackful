@@ -1,6 +1,6 @@
 #this works on Ubuntu Linux, change for your OS.
 development:
-  adapter: postgresql
+  adapter:  postgresql
   encoding: utf8
   database: hackful_dev
   username: 7even
@@ -17,3 +17,11 @@ test: &test
 
 cucumber:
   <<: *test
+
+production:
+  adapter:  postgresql
+  encoding: utf8
+  database: hackful_production
+  username: YOUR_USERNAME # replace this with your username
+  password:
+  host:     localhost
