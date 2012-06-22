@@ -28,7 +28,7 @@
         - if can? :create, Post
           = link_to "submit", "/posts/new"
         %form{:action => '/search', :class => "search"}
-          %input{:name => "s", :type => "text", :placeholder => "Search"}
+          %input{:name => "s", :type => "text", :placeholder => "Search", :style => 'padding: 0; font-size: 12pt; font-family: auto;' }
 
         - if user_signed_in?
           - if current_user.notifications.where(:unread => true).count > 0
