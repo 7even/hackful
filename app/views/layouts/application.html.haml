@@ -5,39 +5,39 @@
       = @title
       = " - " if @title.length > 0
       Hackful Europe
-    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => @meta_keywords, :name => "keywords"}/
-    %meta{:content => @meta_description, :name => "description"}/
-    = stylesheet_link_tag    "application"
-    = javascript_include_tag "application"
+    %meta{:content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type'}/
+    %meta{:content => @meta_keywords, :name => 'keywords'}/
+    %meta{:content => @meta_description, :name => 'description'}/
+    = stylesheet_link_tag    'application'
+    = javascript_include_tag 'application'
     = csrf_meta_tags
     = yield :head
   %body
     .header
       %span.title
         %img{:src => "/assets/hackful.png"}/
-        = link_to "Hackful Europe", "/"
+        = link_to 'IrGlobe', '/'
       %span.navigation
         - if user_signed_in? && current_user.sign_in_count < 7
-          = link_to "welcome", "/welcome"
-        = link_to "jobs", "/jobs"
-        = link_to "top", "/"
-        = link_to "new", "/new"
-        = link_to "ask", "/ask"
-        = link_to "blog", "http://posts.irglobe.com", {:target => "_blank"}
+          = link_to 'welcome', '/welcome'
+        = link_to 'top', '/'
+        = link_to 'new', '/new'
+        = link_to 'ask', '/ask'
+        = link_to 'jobs', '/jobs'
+        = link_to 'posts', 'http://posts.irglobe.com', {:target => '_blank'}
         - if can? :create, Post
-          = link_to "submit", "/posts/new"
-        %form{:action => '/search', :class => "search"}
-          %input{:name => "s", :type => "text", :placeholder => "Search", :style => 'padding: 0; font-size: 12pt; font-family: auto;' }
+          = link_to 'submit', '/posts/new'
+        %form{:action => '/search', :class => 'search'}
+          %input{:name => 's', :type => 'text', :placeholder => 'Search', :style => 'padding: 0; font-size: 12pt; font-family: auto;' }
 
         - if user_signed_in?
           - if current_user.notifications.where(:unread => true).count > 0
-            = link_to "&#9993;".html_safe, "/notifications", :class => "notification alert"
+            = link_to "&#9993;".html_safe, '/notifications', :class => 'notification alert'
           - else
-            = link_to "&#9993;".html_safe, "/notifications", :class => "notification"
+            = link_to "&#9993;".html_safe, '/notifications', :class => 'notification'
       %span.user
         - if user_signed_in?
-          = link_to "&#9998;".html_safe, "/users/edit"
+          = link_to "&#9998;".html_safe, '/users/edit'
           \&nbsp;#{link_to(current_user.name, user_path(current_user.name))}&nbsp;&nbsp;#{link_to('Sign out', destroy_user_session_path, :method => :delete)}
         - else
           = link_to('Sign in', new_user_session_path)
@@ -45,4 +45,4 @@
     .body
       = yield
     .footer
-      = link_to "About", "/about"
+      = link_to 'About', '/about'
