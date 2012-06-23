@@ -2,9 +2,7 @@
 %html
   %head
     %title
-      = @title
-      = " - " if @title.length > 0
-      Hackful Europe
+      = [@title, 'IrGlobe'].compact.join(' - ')
     %meta{:content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type'}/
     %meta{:content => @meta_keywords, :name => 'keywords'}/
     %meta{:content => @meta_description, :name => 'description'}/
