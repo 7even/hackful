@@ -25,8 +25,7 @@
         = link_to 'ask', '/ask'
         = link_to 'jobs', '/jobs'
         = link_to 'posts', 'http://posts.irglobe.com', {:target => '_blank'}
-        - if can? :create, Post
-          = link_to 'submit', '/posts/new'
+        = link_to 'submit', '/posts/new'
         %form{:action => '/search', :class => 'search'}
           %input{:name => 's', :type => 'text', :placeholder => 'Search', :style => 'padding: 0; font-size: 12pt; font-family: auto;' }
 
